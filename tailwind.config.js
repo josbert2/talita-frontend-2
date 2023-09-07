@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  //https://dribbble.com/shots/18142291-Food-Order-Management-Dashboard
   content: [
     './pages/**/*.{js,jsx}',
     './components/**/*.{js,jsx}',
@@ -53,7 +52,7 @@ module.exports = {
         },
       },
       borderRadius: {
-        lg: "10px",
+        lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },

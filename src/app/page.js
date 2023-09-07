@@ -1,10 +1,20 @@
 'use client'
 
 import { useState } from 'react'
-
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
-export default function page() {
+export default function page({ className, ...props }) {
 
   const [file, setFile] = useState(null)
   const [imageUrl, setImageUrl] = useState(null)
@@ -16,13 +26,44 @@ export default function page() {
           <svg class="mx-auto w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="m8 16 4-9 4 9M8 12h4" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10"></path></svg>
           
         </div>
+        <div class="flex items-center justify-center">
+          <Button className="bg-white mt-5 w-full h-[60px] active relative by-items-aside" variant="outline" size="icon">
+            <div class="inner-content-icon bg-cyan-500 shadow shadow-[#FF6A49]/50">
+              <svg class="mx-auto w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="m8 16 4-9 4 9M8 12h4" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10"></path></svg>
+            </div>
+          </Button>
+        </div>
       </div>
       <div class="main-content">
-        main content
-        <div>
-          
-  
-        
+        <div class="px-4 py-4">
+          <Card className={cn("w-[380px] mx-auto", className)} {...props}>
+            <CardHeader>
+              <CardTitle>Agregar una nueva comida</CardTitle>
+              <CardDescription>Intenta ser lo mas claro posible.</CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4">
+              <div className="   rounded-mdr">
+                <div className="grid w-full max-w-sm items-center gap-1.5 mb-5">
+                  <Label htmlFor="nombre">Nombre del plato</Label>
+                  <Input id="nombre" type="text" />
+                </div>
+
+                <div className="grid w-full max-w-sm items-center gap-1.5 mb-5">
+                  <Label htmlFor="nombre">Precio</Label>
+                  <Input id="nombre" type="text" />
+                </div>
+                <div className="grid w-full max-w-sm items-center gap-1.5 ">
+                  <Label htmlFor="picture">Foto de la comida</Label>
+                  <Input id="picture" type="file" />
+                </div>
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full">
+                Agregar comida
+              </Button>
+            </CardFooter>
+          </Card>
         </div>
       </div>
       page
