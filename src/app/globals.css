@@ -17,11 +17,18 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  
+}
+.main-content{
+  margin-left: 290px;
+
+  width: calc(100% - 290px);
+  max-width: calc(100% - 290px);
+
+}
+
+
+.main-wrapper-content{
+height: 100vh;
+width: 100vw;
 }
