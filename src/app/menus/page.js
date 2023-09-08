@@ -1,0 +1,95 @@
+'use client'
+import React, { useEffect, useState } from 'react'
+import debounce from 'lodash/debounce';
+
+import { Button } from "@/components/ui/button"
+import Link from 'next/link'
+import Image from 'next/image'
+import Loading from '../loading'
+
+import { Input } from "@/components/ui/input"
+const Page = () => {
+
+    const [menus, setMenus] = useState([])
+    const [loading, setLoading] = useState(true);
+
+
+
+    // search
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredMenus, setFilteredMenus] = useState([]);
+
+    const handleSearch = () => {
+      debouncedGetMenus(searchTerm);
+    }
+
+    const getMenus = async (search = '') => {
+      const URL_API = 'http://localhost:3001/api/'
+      try {
+          const response = await fetch(`${URL_API}menus?q=${search}`);
+          if (!response.ok) throw new Error(response.statusText);
+          const data = await response.json();
+          console.log(data)
+          setFilteredMenus(data);
+          setLoading(false)
+      }
+      catch (error) {
+          console.log(error);
+      }
+    }
+
+    const debouncedGetMenus = debounce(getMenus, 300);
+
+    useEffect(() => {
+      getMenus()
+    }, [])
+
+    return (
+        <div>
+            <div class="flex justify-end pb-10 pt-10">
+              <Button> 
+                <Link href="/menus/add">
+                  <div class="flex items-center">
+                    <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" 
+                    width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M8 12h8M12 16V8M9 22h6c5 0 7-2 7-7V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7Z" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Añadir menu 
+                  </div>
+                </Link>
+              </Button>
+            </div>
+            <div class="pt-6">
+              <div class="pb-6">
+                <div className="flex w-full max-w-sm  items-center space-x-2">
+                  <Input type="text" placeholder="Buscar menus..." 
+                    value={searchTerm}
+                    onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                        handleSearch();
+                    }}
+                  />
+                  <Button type="submit" onClick={handleSearch}>Buscar</Button>
+                </div>
+              </div>
+              <div class="grid grid-cols-4 gap-5">
+              {loading ? (
+                  <Loading />
+              ) : (
+                menus.map((menu) => (
+                    <div className="flex items-center border rounded-lg relative bg-white shadow hover:bg-gray-400/25" key={menu.id}>
+                        <div className="pl-5 flex-1">
+                            <h2 className="text-base">{menu.nombre}</h2>
+                        </div>
+                        <div className="header-img flex-1  rounded-lg">
+                            <Image class="rounded-lg" src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614568/pickbazar/grocery/GreenLimes_jrodle.jpg" width={200} height={200} />
+                        </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+        </div>
+    )
+}
+
+export default Page

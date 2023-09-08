@@ -1,7 +1,12 @@
 import './globals.css'
+import { Suspense } from 'react'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+
+import Header from '../components/Header'
+import Loading from './loading.js';
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,7 +16,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Header />
+        <div class="main-content">
+            <div class="px-20 py-4">
+              <Suspense fallback={<Loading/>}>
+                {children}
+              </Suspense>
+            </div>
+            <Toaster />
+        </div>
+      
+      </body>
     </html>
   )
 }
