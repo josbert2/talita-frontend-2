@@ -14,9 +14,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/components/ui/use-toast"
 
+import { useSession } from 'next-auth/react'
+
 
 
 export default function page() {
+
+    const { data: session, status } = useSession()
+    console.log(session, status)
     
     const { toast } = useToast()
 

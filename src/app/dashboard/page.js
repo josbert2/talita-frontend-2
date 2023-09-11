@@ -3,8 +3,13 @@ import React, { useState, useEffect, Suspense } from "react";
 import Loading from './loading.js';
 import { Card, Title, BarChart, Subtitle } from "@tremor/react";
 
+import { useSession } from 'next-auth/react'
 
 const Page = () => {
+
+    const { data: session, status } = useSession()
+    console.log(session, status)
+
     const URL_API = 'http://localhost:3001/api/'
     const [count, setCount] = useState(0);
     const [loading, setLoading] = useState(true);

@@ -41,8 +41,8 @@ const Page = () => {
     const debouncedGetMenus = debounce(getMenus, 300);
 
     useEffect(() => {
-      getMenus()
-    }, [])
+      debouncedGetMenus(searchTerm);
+    }, [searchTerm])
 
     return (
         <div>
@@ -60,12 +60,11 @@ const Page = () => {
             </div>
             <div class="pt-6">
               <div class="pb-6">
-                <div className="flex w-full max-w-sm  items-center space-x-2">
+                <div className="flex items-center w-full max-w-sm space-x-2">
                   <Input type="text" placeholder="Buscar menus..." 
                     value={searchTerm}
                     onChange={(e) => {
                         setSearchTerm(e.target.value);
-                        handleSearch();
                     }}
                   />
                   <Button type="submit" onClick={handleSearch}>Buscar</Button>
@@ -75,15 +74,20 @@ const Page = () => {
               {loading ? (
                   <Loading />
               ) : (
-                menus.map((menu) => (
-                    <div className="flex items-center border rounded-lg relative bg-white shadow hover:bg-gray-400/25" key={menu.id}>
-                        <div className="pl-5 flex-1">
-                            <h2 className="text-base">{menu.nombre}</h2>
-                        </div>
-                        <div className="header-img flex-1  rounded-lg">
-                            <Image class="rounded-lg" src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614568/pickbazar/grocery/GreenLimes_jrodle.jpg" width={200} height={200} />
-                        </div>
-                    </div>
+                filteredMenus.map((menu) => (
+                    <Link href={'/menus/' + menu.id }>
+                      <div className="relative flex items-center bg-white border rounded-lg shadow hover:bg-gray-400/25" key={menu.id}>
+                          <div className="flex-1 pl-5">
+                              <h2 className="text-base">{menu.nombre}</h2>
+                              <p className="text-sm text-gray-500">{menu.descripcion}</p>
+                              <p>{menu.precio}</p>
+                          </div>
+                          <div className="flex-1 rounded-lg header-img">
+                              <Image class="rounded-lg" src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614568/pickbazar/grocery/GreenLimes_jrodle.jpg" width={200} height={200} />
+                          </div>
+                      </div>
+                    </Link>
+                    
                   ))
                 )}
               </div>
