@@ -1,10 +1,13 @@
 'use client'
 import { set } from 'lodash';
 import React, { useState } from 'react'
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
- function page() {
+function page() {
 
     const [error, setError] = React.useState(null);
+    const router = useRouter()
 
     const handlerSubmit =  async (e) => {
         e.preventDefault();
@@ -14,6 +17,7 @@ import React, { useState } from 'react'
         const nombre = formData.get('nombre')
         const email = formData.get('email')
         const password = formData.get('password')
+        const NewPassword = formData.get('password')
 
         console.log(nombre, email, password)
 
@@ -26,7 +30,24 @@ import React, { useState } from 'react'
     
             })
             const data = await response.json()
+
             console.log(data)
+
+            const restingSignin = await signIn('credentials', {
+                email: data.message,
+                password: NewPassword,
+                redirect: false
+            })
+
+            if (restingSignin.ok){
+                router.push('/dashboard')
+            }
+                
+
+
+            console.log(restingSignin)
+
+            
             if (data.message === "User already exists"){
                 setError(data.message)
             }

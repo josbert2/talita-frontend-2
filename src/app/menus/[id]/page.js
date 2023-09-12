@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+
+
+import AddToCart from '@/components/AddToCart'
+
 import { Button } from "@/components/ui/button"
 import Loading from './loading'
 
@@ -59,11 +63,7 @@ export default function page({ params }) {
                           {menu.tipo}
                         </p>
                         <div class="flex w-full pt-20">
-                          <Link href="/checkout">
-                            <Button>
-                              Hacer pedido
-                            </Button>
-                          </Link>
+                          <AddToCart showQty={false} product={menu} increasePerClick={true} />
                         </div>
                     </div>
                 </div>

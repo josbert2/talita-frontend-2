@@ -1,11 +1,12 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from "next-auth/providers/credentials"
-import { hash } from "bcrypt";
+import  hash  from "bcrypt";
 
 const handler = NextAuth({
     providers: [
         CredentialsProvider({
             name: 'Credentials',
+            id: "credentials",
             credentials: {
                 email: { label: "Email", type: "email", placeholder: "jsmith" },
                 password: { label: "Password", type: "password" }
@@ -14,7 +15,7 @@ const handler = NextAuth({
                 const API_URL = 'http://localhost:3001/api/'
                 
             
-                const response = await fetch(API_URL + 'auth', {
+                const response = await fetch(API_URL + 'credentials', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -22,34 +23,44 @@ const handler = NextAuth({
                     body: JSON.stringify(credencials)
                 })
 
-                console.log(response)
-                return credencials
-
-                const user = await response.json()
-                if (!user) {
+                const  userFound = await response.json()
+                if (! userFound) {
                     throw new Error('No user found, Invalid credencials')
                 }
-                const passwrodMatch = await hash.compare(credencials.password, user.password)
+
+                const passwrodMatch = await hash.compare(credencials.password,  userFound.hashedPassword)
+
                 if (!passwrodMatch) {
                     throw new Error('Invalid credencials')
                 }
 
-                console.log(user)
+            
 
-
-                return user 
+                
+                return userFound 
             }
         })
     ],
+    pages: {
+        signIn: "/login",
+    }, 
+    session: {
+        strategy: "jwt",
+    },
     callbacks: {
-        jwt({ token, user, account, profile, session }) {
+        async jwt({ token, user }) {
+        
+            
             if (user) return token.user = user
+            
             return token;
         },
-        session({
+        async session({
             session, token
         }) {
-            session.user = token.user
+            
+            session.user = token
+        
             return session
         }
     }

@@ -1,22 +1,19 @@
 import React from 'react'
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 
 import Link from "next/link"
+
+import { useSelector } from 'react-redux'
+import { useSession } from 'next-auth/react'
+import { usePathname } from 'next/navigation'
 
 
 
 export default function Header() {
+    const { data: session, status } = useSession()
+    const { loading, cartItems } = useSelector((state) => state.cart)
+    const pathname = usePathname()
+    console.log(session, status)
   return (
     <>
         <header class="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
@@ -31,15 +28,15 @@ export default function Header() {
                         <span class="hidden font-bold sm:inline-block">Talita Restaurant</span>
                     </a>
                     <nav class="flex items-center space-x-6 text-sm font-medium">
+                        
+                        
                         <Link activeClassName="active" className='transition-colors hover:text-foreground/80 text-foreground/60' href="/dashboard">
                             Dashboard
                         </Link>
                         <Link  activeClassName="active" className='transition-colors hover:text-foreground/80 text-foreground/60' href="/menus">
                             Menus
                         </Link>
-                        <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="/docs/components">Components</a>
-                        <a class="transition-colors hover:text-foreground/80 text-foreground/60" href="/themes">Themes</a><a class="transition-colors hover:text-foreground/80 text-foreground/60" href="/examples">Examples</a>
-                        <a class="hidden text-foreground/60 transition-colors hover:text-foreground/80 lg:block" href="https://github.com/shadcn-ui/ui">GitHub</a>
+                        
                     </nav>
                 </div>
                 <button
@@ -61,31 +58,57 @@ export default function Header() {
                     <span class="sr-only">Toggle Menu</span>
                 </button>
                 <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-                    <div class="w-full flex-1 md:w-auto md:flex-none">
-                        <button
-                            class="inline-flex items-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64"
-                        >
-                            <span class="hidden lg:inline-flex">Search documentation...</span><span class="inline-flex lg:hidden">Search...</span>
-                            <kbd class="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-                                <span class="text-xs">⌘</span>K
-                            </kbd>
-                        </button>
-                    </div>
+                    
                     <nav class="flex items-center">
-                        <Link href="/login" class="px-5">
-                            <div
-                                class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 py-2 w-9 px-0"
-                            >
-                                Login
+                        
+                    {session ? (
+                            <div>
+                                {session.user && (
+                                    <span>
+                                        {session.user.nombre}
+                                    </span>
+                                )}
                             </div>
-                        </Link>
-                        <Link href="/signup" class="px-5">
-                            <div
-                                class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 py-2 w-9 px-0"
-                            >
-                                Signup
+                        ) : (
+                            <div>
+                                <Link href="/login" class="px-5">
+                                    <div
+                                        class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 py-2 w-9 px-0"
+                                    >
+                                        Login
+                                    </div>
+                                </Link>
+                                <Link href="/signup" class="px-5">
+                                    <div
+                                        class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 py-2 w-9 px-0"
+                                    >
+                                        Signup
+                                    </div>
+                                </Link>
                             </div>
-                        </Link>
+                        )}
+                        <div>
+                            <span className="cart-badge">
+                                {loading ? '' : cartItems.reduce((a, c) => a + c.qty, 0)}
+                            </span>
+                            <Link href="/cart" className="flex items-end justify-between">
+                                <svg
+                                fill="#ffffff"
+                                viewBox="100 120 200 280"
+                                width="40px"
+                                height="40px"
+                                >
+                                <path d="M 110.164 188.346 C 104.807 188.346 100.437 192.834 100.437 198.337 C 100.437 203.84 104.807 208.328 110.164 208.328 L 131.746 208.328 L 157.28 313.233 C 159.445 322.131 167.197 328.219 176.126 328.219 L 297.409 328.219 C 306.186 328.219 313.633 322.248 315.951 313.545 L 341.181 218.319 L 320.815 218.319 L 297.409 308.237 L 176.126 308.237 L 150.592 203.332 C 148.426 194.434 140.675 188.346 131.746 188.346 L 110.164 188.346 Z M 285.25 328.219 C 269.254 328.219 256.069 341.762 256.069 358.192 C 256.069 374.623 269.254 388.165 285.25 388.165 C 301.247 388.165 314.431 374.623 314.431 358.192 C 314.431 341.762 301.247 328.219 285.25 328.219 Z M 197.707 328.219 C 181.711 328.219 168.526 341.762 168.526 358.192 C 168.526 374.623 181.711 388.165 197.707 388.165 C 213.704 388.165 226.888 374.623 226.888 358.192 C 226.888 341.762 213.704 328.219 197.707 328.219 Z M 197.707 348.201 C 203.179 348.201 207.434 352.572 207.434 358.192 C 207.434 363.812 203.179 368.183 197.707 368.183 C 192.236 368.183 187.98 363.812 187.98 358.192 C 187.98 352.572 192.236 348.201 197.707 348.201 Z M 285.25 348.201 C 290.722 348.201 294.977 352.572 294.977 358.192 C 294.977 363.812 290.722 368.183 285.25 368.183 C 279.779 368.183 275.523 363.812 275.523 358.192 C 275.523 352.572 279.779 348.201 285.25 348.201 Z" />
+                                </svg>
+                                Cart
+                            </Link>
+                            {!loading && cartItems.length > 0 && pathname !== '/cart' && (
+                                <div className="caret"></div>
+                            )}
+                        </div>
+
+
+                        
                         <button
                             class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 py-2 w-9 px-0"
                             type="button"
