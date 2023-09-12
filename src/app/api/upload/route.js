@@ -19,6 +19,8 @@ export async function POST(request){
     const image = data.get('image')
 
     
+
+    
     
     if (!image ) {
         return NextResponse.error(new Error('No file uploaded'))

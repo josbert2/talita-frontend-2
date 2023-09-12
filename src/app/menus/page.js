@@ -83,7 +83,16 @@ const Page = () => {
                               <p>{menu.precio}</p>
                           </div>
                           <div className="flex-1 rounded-lg header-img">
-                              <Image class="rounded-lg" src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614568/pickbazar/grocery/GreenLimes_jrodle.jpg" width={200} height={200} />
+                              {menu.imagen ? (
+                                  <div>
+                                    <Image class="rounded-lg" alt={menu.nombre} src={menu.imagen} width={200} height={200} />
+                                  </div>
+                              ) : (
+                                <div>
+                                  asd
+                                </div>
+                              )}
+                            
                           </div>
                       </div>
                     </Link>

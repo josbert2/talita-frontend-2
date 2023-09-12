@@ -16,7 +16,7 @@ export default function Header() {
     console.log(session, status)
   return (
     <>
-        <header class="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+        <header class="pl-[150px] supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
             <div class="container flex h-14 items-center">
                 <div class="mr-4 hidden md:flex">
                     <a class="mr-6 flex items-center space-x-2" href="/">
@@ -140,7 +140,7 @@ export default function Header() {
             </div>
         </header>
 
-        <div class="aside overflow-hidden bg-white fixed flex flex-col h-screen top-0 border-r px-3 py-3 ">
+        <div class="aside z-[100] overflow-hidden bg-white fixed flex flex-col h-screen top-0 border-r px-3 py-3 ">
             <div class="flex items-center justify-center rounded-lg  px-6 py-5 shadow-[15px_16px_100px_20px_rgba(0,0,0,0.1)]">
             <svg class="mx-auto w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="m8 16 4-9 4 9M8 12h4" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10"></path></svg>
             
