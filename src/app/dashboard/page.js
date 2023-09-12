@@ -105,6 +105,9 @@ const Page = () => {
                             </div>
                             <h2>Precio total: {totalPrice}</h2>
                         </div>
+                        <div class="">
+                            <h2 class="scroll-m-20 text-4xl font-bold tracking-tight">Productos mas vendidos</h2>
+                        </div>
                     </div>
                 </div>
             ) }

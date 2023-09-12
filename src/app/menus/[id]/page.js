@@ -41,8 +41,16 @@ export default function page({ params }) {
           ) : (
             <div className='grid grid-cols-2 gap-6'>
               <div className="flex justify-center">
-                <Image class="rounded-lg" src="https://res.cloudinary.com/redq-inc/image/upload/c_fit,q_auto:best,w_300/v1589614568/pickbazar/grocery/GreenLimes_jrodle.jpg"
-                width={400} height={400} />
+              {menu.imagen ? (
+                  <div>
+                    <Image class="rounded-lg" alt={menu.nombre} src={menu.imagen} width={400} height={400} />
+                  </div>
+              ) : (
+                <div>
+                  asd
+                </div>
+              )}
+              
               </div>
               <div className="">
                 <div className="relative flex items-center pt-10 bg-white" key={menu.id}>
