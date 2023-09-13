@@ -31,7 +31,7 @@ async function getAllMenus () {
         const response = await fetch(`${URL_API}menus`);
         if (!response.ok) throw new Error(response.statusText);
         const data = await response.json();
-        console.log(data)
+      
         return data
     }
     catch (error) {

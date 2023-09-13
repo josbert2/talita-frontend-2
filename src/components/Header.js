@@ -53,6 +53,9 @@ export default function Header() {
                         <Link  activeClassName="active" className='transition-colors hover:text-foreground/80 text-foreground/60' href="/menus">
                             Menus
                         </Link>
+                        <Link  activeClassName="active" className='transition-colors hover:text-foreground/80 text-foreground/60' href="/categorias">
+                            Categorías
+                        </Link>
                         
                     </nav>
                 </div>
@@ -77,7 +80,7 @@ export default function Header() {
                 <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
                     
                     <nav class="flex items-center">
-                        
+                    
                     {session ? (
                             <div class="mr-4">
                                 {session.user && (
@@ -124,7 +127,22 @@ export default function Header() {
                             
                             <Link href="/cart" class="ml-4">
                                 <Badge variant="outline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 2h1.74c1.08 0 1.93.93 1.84 2l-.83 9.96a2.796 2.796 0 0 0 2.79 3.03h10.65c1.44 0 2.7-1.18 2.81-2.61l.54-7.5c.12-1.66-1.14-3.01-2.81-3.01H5.82M16.25 22a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM8.25 22a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM9 8h12" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="18"
+                                        height="18"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                    >
+                                    <path
+                                        stroke="#FF8A65"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeMiterlimit="10"
+                                        strokeWidth="1.5"
+                                        d="M2 2h1.74c1.08 0 1.93.93 1.84 2l-.83 9.96a2.796 2.796 0 002.79 3.03h10.65c1.44 0 2.7-1.18 2.81-2.61l.54-7.5c.12-1.66-1.14-3.01-2.81-3.01H5.82M16.25 22a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5zm-8 0a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5zM9 8h12"
+                                    ></path>
+                                    </svg>
                                 </Badge>
                             </Link>
                             
@@ -141,13 +159,56 @@ export default function Header() {
 
         <div class="aside z-[100] overflow-hidden bg-white fixed flex flex-col h-screen top-0 border-r px-3 py-3 ">
             <div class="flex items-center justify-center rounded-lg  px-6 py-5 shadow-[15px_16px_100px_20px_rgba(0,0,0,0.1)]">
-            <svg class="mx-auto w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="m8 16 4-9 4 9M8 12h4" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10"></path></svg>
-            
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="none"
+                className="w-6 h-6 mx-auto"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke="#FF8A65"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="1.5"
+                    d="M8 16l4-9 4 9m-8-4h4"
+                ></path>
+                <path
+                    stroke="#FF8A65"
+                    strokeMiterlimit="10"
+                    strokeWidth="1.5"
+                    d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                ></path>
+                </svg>
             </div>
             <div class="flex items-center justify-center">
                 <Button className="bg-white mt-5 w-full h-[60px] active relative by-items-aside" variant="outline" size="icon">
                     <div class="inner-content-icon bg-cyan-500 shadow shadow-[#FF6A49]/50">
-                    <svg class="mx-auto w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="m8 16 4-9 4 9M8 12h4" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10"></path></svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            fill="none"
+                            className="w-6 h-6 mx-auto"
+                            viewBox="0 0 24 24"
+                            >
+                            <path
+                                stroke="#FF8A65"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeMiterlimit="10"
+                                strokeWidth="1.5"
+                                d="M8 16l4-9 4 9m-8-4h4"
+                            ></path>
+                            <path
+                                stroke="#FF8A65"
+                                strokeMiterlimit="10"
+                                strokeWidth="1.5"
+                                d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                            ></path>
+                            </svg>
                     </div>
                 </Button>
             </div>

@@ -1,20 +1,18 @@
 import { z } from "zod";
 
 // Convierte el schema de la tabla 'menus' a un esquema zod
-export const menuSchema = z.object({
-  id: z.number(),
-  categoria_id: z.number().nullable(),
-  nombre: z.string(),
-  descripcion: z.string().nullable(),
-  ingredientes: z.string().nullable(),
-  precio: z.number().nullable(),
-  precioOferta: z.number().nullable(),
-  stock: z.number().nullable(),
-  imagen: z.string().nullable(),
-  tipo: z.string().nullable(),
-  user_id: z.number().nullable(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
-});
+export const taskSchema = z.object({
+  id: z.any(),
+  nombre: z.any(),
+  descripcion: z.any(),
+  precio: z.any(),
+  precioOferta: z.any(),
+  stock: z.any(),
+  imagen: z.any(),
+  tipo: z.any(),
+  user_id: z.any(),
+  createdAt: z.any(),
+  updatedAt: z.any(),
+})
 
 export type Menu = z.infer<typeof menuSchema>;

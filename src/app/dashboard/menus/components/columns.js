@@ -6,6 +6,8 @@ import { labels, priorities, statuses } from "../data/data"
 import { DataTableColumnHeader } from "./data-table-column-header"
 import { DataTableRowActions } from "./data-table-row-actions.js"
 
+import { Imagen } from "next/image"
+
 export const columns = [
   {
     id: "select",
@@ -38,9 +40,31 @@ export const columns = [
     enableHiding: false
   },
   {
-    accessorKey: "title",
+    accessorKey: "imagen",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Title" />
+      <DataTableColumnHeader column={column} title="imagen" />
+    ),
+    cell: ({ row }) => {
+      const label = labels.find(label => label.value === row.original.label)
+
+      
+
+      return (
+        <div className="flex space-x-2">
+          {label && <Badge variant="outline">{label.label}</Badge>}
+          <span className="max-w-[500px] truncate font-medium">
+            <div class="w-11 h-11 rounded-lg">
+              <img class="w-full h-full object-contain rounded-lg" src={row.getValue("imagen")} alt="imagen" />
+            </div>
+          </span>
+        </div>
+      )
+    }
+  },
+  {
+    accessorKey: "nombre",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Nombre" />
     ),
     cell: ({ row }) => {
       const label = labels.find(label => label.value === row.original.label)
@@ -49,13 +73,67 @@ export const columns = [
         <div className="flex space-x-2">
           {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("title")}
+            {row.getValue("nombre")}
           </span>
         </div>
       )
     }
   },
   {
+    accessorKey: "descripcion",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="descripcion" />
+    ),
+    cell: ({ row }) => {
+      const label = labels.find(label => label.value === row.original.label)
+
+      return (
+        <div className="flex space-x-2">
+          {label && <Badge variant="outline">{label.label}</Badge>}
+          <span className="max-w-[500px] truncate font-medium">
+            {row.getValue("descripcion")}
+          </span>
+        </div>
+      )
+    }
+  },
+  {
+    accessorKey: "precio",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="precio" />
+    ),
+    cell: ({ row }) => {
+      const label = labels.find(label => label.value === row.original.label)
+
+      return (
+        <div className="flex space-x-2">
+          {label && <Badge variant="outline">{label.label}</Badge>}
+          <span className="max-w-[500px] truncate font-medium">
+            {row.getValue("precio")}
+          </span>
+        </div>
+      )
+    }
+  },
+  {
+    accessorKey: "tipo",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="tipo" />
+    ),
+    cell: ({ row }) => {
+      const label = labels.find(label => label.value === row.original.label)
+
+      return (
+        <div className="flex space-x-2">
+          {label && <Badge variant="outline">{label.label}</Badge>}
+          <span className="max-w-[500px] truncate font-medium">
+            {row.getValue("tipo")}
+          </span>
+        </div>
+      )
+    }
+  },
+  /*{
     accessorKey: "status",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
@@ -85,7 +163,7 @@ export const columns = [
   {
     accessorKey: "priority",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Priority" />
+      <DataTableColumnHeader column={column} title="Priorityp" />
     ),
     cell: ({ row }) => {
       const priority = priorities.find(
@@ -108,7 +186,7 @@ export const columns = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     }
-  },
+  }, */
   {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />
