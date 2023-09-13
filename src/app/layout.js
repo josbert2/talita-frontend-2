@@ -13,7 +13,7 @@ import { usePathname } from 'next/navigation'
 
 import Header from '../components/Header'
 import Loading from './loading.js';
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "../components/ui/toaster"
 
 import Providers from './Providers'
 import { StoreProvider } from './redux/StoreProvider'

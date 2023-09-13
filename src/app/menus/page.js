@@ -82,10 +82,10 @@ const Page = () => {
                               <p className="text-sm text-gray-500">{menu.descripcion}</p>
                               <p>{menu.precio}</p>
                           </div>
-                          <div className="flex-1 rounded-lg header-img">
+                          <div className="rounded-lg  header-img">
                               {menu.imagen ? (
-                                  <div>
-                                    <Image class="rounded-lg" alt={menu.nombre} src={menu.imagen} width={200} height={200} />
+                                  <div class="w-20  h-20">
+                                    <Image class="rounded-r-lg  rounded-br-lg w-full h-full" alt={menu.nombre} src={menu.imagen} width={200} height={200} />
                                   </div>
                               ) : (
                                 <div>

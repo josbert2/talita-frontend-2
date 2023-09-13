@@ -115,7 +115,7 @@ export default function page() {
             </CardHeader>
             <CardContent className="grid gap-4">
               <form onSubmit={handlerSubmit}>
-                <div className="   rounded-mdr">
+                <div className=" rounded-mdr">
 
                     <div className="grid w-full max-w-sm items-center gap-1.5 mb-5">
                         <Label htmlFor="nombre">Nombre del plato</Label>
