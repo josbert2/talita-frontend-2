@@ -13,7 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "@/registry/new-york/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"
 
 import { clsx } from "clsx"
 import { twMerge } from "tailwind-merge"

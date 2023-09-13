@@ -18,6 +18,7 @@ import {
 
 import { labels } from "../data/data"
 import { taskSchema } from "../data/schema"
+import { MenuSchema } from "../data/menu-schema"
 
 export function DataTableRowActions({ row }) {
   const task = taskSchema.parse(row.original)

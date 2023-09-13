@@ -2,7 +2,7 @@
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { MixerHorizontalIcon } from "@radix-ui/react-icons"
 
-import { Button } from "@/components/ui/ui/button"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,

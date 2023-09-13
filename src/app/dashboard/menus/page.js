@@ -16,16 +16,37 @@ import { taskSchema } from "./data/schema"
 // Simulate a database read for tasks.
 async function getTasks() {
   const data = await fs.readFile(
-    path.join(process.cwd(), "app/examples/tasks/data/tasks.json")
+    path.join(process.cwd(), "./src/app/dashboard/menus/data/tasks.json")
   )
 
   const tasks = JSON.parse(data.toString())
+ 
 
   return z.array(taskSchema).parse(tasks)
 }
 
+async function getAllMenus () {
+    const URL_API = 'http://localhost:3001/api/'
+    try {
+        const response = await fetch(`${URL_API}menus`);
+        if (!response.ok) throw new Error(response.statusText);
+        const data = await response.json();
+        console.log(data)
+        return data
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
 
-export default function page() {
+
+
+export default async function page() {
+    const tasks = await getTasks()
+    const menus = await getAllMenus()
+
+
+    
   return (
     <div>
         <h1 class="scroll-m-20 text-xl font-bold tracking-tight">Gestión de menus</h1>
@@ -58,7 +79,7 @@ export default function page() {
             <UserNav />
           </div>
         </div>
-        <DataTable data={tasks} columns={columns} />
+        <DataTable data={menus} columns={columns} />
       </div>
 
     </div>
