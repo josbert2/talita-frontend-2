@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -31,6 +32,15 @@ export default function Header() {
     const { loading, cartItems } = useSelector((state) => state.cart)
     const pathname = usePathname()
     console.log(session, status)
+
+    const rutasActivas = [
+        '/dashboard/menus',
+        '/dashboard/settings',
+        '/dashboard/profile',
+        // ... puedes agregar tantas rutas como necesites
+    ];
+    const isActive = rutasActivas.includes(pathname);
+
   return (
     <>
         <header class="pl-[150px] supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
@@ -184,7 +194,7 @@ export default function Header() {
                 </svg>
             </div>
             <div class="flex items-center justify-center">
-                <Button className="bg-white mt-5 w-full h-[60px] active relative by-items-aside" variant="outline" size="icon">
+                <Button  className={`bg-white mt-5 w-full h-[60px] relative by-items-aside ${pathname == '/dashboard/' ? 'active' : ''} `} variant="outline" size="icon">
                     <div class="inner-content-icon bg-cyan-500 shadow shadow-[#FF6A49]/50">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +225,8 @@ export default function Header() {
 
             <div class="flex items-center justify-center">
                 <Link href="/dashboard/menus" class="flex w-full">
-                    <Button className="bg-white mt-5 w-full h-[60px]  relative by-items-aside" variant="outline" size="icon">
+            
+                    <Button className={`bg-white mt-5 w-full h-[60px] relative by-items-aside ${pathname == '/dashboard/menus' ? 'active' : ''} `} variant="outline" size="icon">
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
@@ -228,6 +239,49 @@ export default function Header() {
                                 <TooltipContent side={"right"} sideOffset={20}>
                                     <p>Lista de menu</p>
                                     
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </Button>
+                </Link>
+            </div>
+
+            <div class="flex items-center justify-center">
+                <Link href="/dashboard/ventas" class="flex w-full">
+            
+                    <Button className={`bg-white mt-5 w-full h-[60px] relative by-items-aside ${pathname == '/dashboard/ventas' ? 'active' : ''} `} variant="outline" size="icon">
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                
+                                    <div class="inner-content-icon bg-cyan-500 shadow shadow-[#FF6A49]/50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M9.5 13.75c0 .97.75 1.75 1.67 1.75h1.88c.8 0 1.45-.68 1.45-1.53 0-.91-.4-1.24-.99-1.45l-3.01-1.05c-.59-.21-.99-.53-.99-1.45 0-.84.65-1.53 1.45-1.53h1.88c.92 0 1.67.78 1.67 1.75M12 7.5v9" stroke="#FF8A65" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M22 12c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2M22 6V2h-4M17 7l5-5" stroke="#FF8A65" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+                            
+                                
+                                </TooltipTrigger>
+                                <TooltipContent side={"right"} sideOffset={20}>
+                                    <p>Ventas</p>
+                                    
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </Button>
+                </Link>
+            </div>
+
+            <div class="flex items-center justify-center">
+                <Link href="/dashboard/caja" class="flex w-full">
+                    <Button className={`bg-white mt-5 w-full h-[60px] relative by-items-aside ${pathname == '/dashboard/caja' ? 'active' : ''} `} variant="outline" size="icon">
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <div class="inner-content-icon bg-cyan-500 shadow shadow-[#FF6A49]/50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M23 17.91c.02.75-.18 1.46-.54 2.07-.2.36-.47.69-.77.96-.69.64-1.6 1.03-2.61 1.06-1.46.03-2.75-.72-3.46-1.87-.38-.59-.61-1.3-.62-2.05-.03-1.26.53-2.4 1.43-3.15.68-.56 1.54-.91 2.48-.93A4 4 0 0 1 23 17.91Z" stroke="#FF8A65" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="m17.44 18.03 1.01.96 2.09-2.02M3.17 7.44 12 12.55l8.77-5.08M12 21.61v-9.07" stroke="#FF8A65" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21.61 9.17v5.66c0 .05 0 .09-.01.14-.7-.61-1.6-.97-2.6-.97-.94 0-1.81.33-2.5.88A3.97 3.97 0 0 0 15 18c0 .75.21 1.46.58 2.06.09.16.2.31.32.45l-1.83 1.01c-1.14.64-3 .64-4.14 0l-5.34-2.96c-1.21-.67-2.2-2.35-2.2-3.73V9.17c0-1.38.99-3.06 2.2-3.73l5.34-2.96c1.14-.64 3-.64 4.14 0l5.34 2.96c1.21.67 2.2 2.35 2.2 3.73Z" stroke="#FF8A65" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+                                </TooltipTrigger>
+                                <TooltipContent side={"right"} sideOffset={20}>
+                                    <p>Caja</p>
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
